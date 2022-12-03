@@ -17,12 +17,6 @@ func createArray() (output [6]int) {
 func bubbleIt(input [6]int) [6]int {
 	for i := 1; i < 6; i++ {
 		if input[i-1] >= input[i] {
-			/*higher := input[i-1]
-			lower := input[i]
-			input[i] = higher
-			input[i-1] = lower*/
-			//почему-то сразу удобный механизм не работал, пришлось прописывать higherlower
-
 			input[i-1], input[i] = input[i], input[i-1]
 			i = 0
 		}
