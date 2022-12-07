@@ -15,8 +15,8 @@ func multiply(a [3][5]int, b [5][4]int) (c [3][4]int) {
 	return
 }
 func main() {
-	fmt.Println("Задание 2. Умножение матриц\n")
-	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru \n\n")
+	fmt.Println("Задание 2. Умножение матриц")
+	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
 
 	a := [3][5]int{
 		{0, 1, 2, 3, 4},
@@ -30,6 +30,7 @@ func main() {
 		{112, 113, 114, 115},
 		{116, 117, 118, 119},
 	}
+	//массив упорядочен для дебага, чтоб проще ошибку найти было
 	c := multiply(a, b)
 	fmt.Println(c)
 
