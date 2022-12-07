@@ -11,15 +11,15 @@ func printOneCycle (m[rows][cols]int){
 	}
 
 }
-func transpose(A[rows][cols]int)transposed [cols][rows]int{
-	for i:=0;i<len(a[0]);i++{
+func transpose(A[rows][cols]int)(transposed [cols][rows]int){
+	for i:=0; i<len(A[0]); i++{
 		for j:=0;j<len(A);j++{
 			transposed[i][j]=A[j][i]
 		}
 	}
 }
-func diagonalSum(A[rows][cols]int)sum int{
-	for i:=0;i,len(A);i++{
+func diagonalSum(A[rows][cols]int)(sum int){
+	for i:=0; i<len(A);i++{
 		sum+=a[i][i]
 	}
 }
@@ -36,5 +36,7 @@ func maximum (input [rows][size]int) int{
 
 }
 func main () {
-	matrix:=[rows][size]
+	matrix:=[rows][size]int
 }
+/*botv fdnj
+новый китайский кроссовер с полной крышей без антикора с дырявыми дверьми*/
