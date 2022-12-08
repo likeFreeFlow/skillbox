@@ -38,5 +38,15 @@ func maximum (input [rows][size]int) int{
 func main () {
 	matrix:=[rows][size]int
 }
-/*botv fdnj
-новый китайский кроссовер с полной крышей без антикора с дырявыми дверьми*/
+
+=====================
+func iAcceptFunctions(x,y,z int,F func(int,int)int)int{
+	return x+F(y,z)
+}
+
+func main (){
+	f:=func(x,y int)int{ return x+y}
+	fmt.Println(f(10,15))
+	fmt.Println(iAcceptFunctions(10,20,30,func(y,z int)int{return y+z})
+	)
+}

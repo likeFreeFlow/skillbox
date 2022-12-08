@@ -1,0 +1,41 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func everybodyAcceptFunctions(x, y, z int, F func(int, int) int) int {
+	return x + F(y, z)
+}
+func rollOfTheDice(AS func()) {
+	defer AS()
+	rand.Seed(time.Now().UnixNano())
+}
+func iSeeDeadPeople(F func()) {
+	Player = Cheater
+	fmt.Println("Cheat Enabled")
+}
+
+func main() {
+	fmt.Println("Задание 1. Расчёт по формуле")
+	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
+	f := func(x, y int) int { return x + y }
+	//ff := func(x, y int) int { return x + y }
+	//fff := func(x, y int) int { return x + y }
+	fmt.Println(f(10, 15))
+	fmt.Println(everybodyAcceptFunctions(10, 20, 30, func(y, z int) int { return y + z }))
+	rollOfTheDice(func() { fmt.Println("Бросок костей:", rand.Intn(6)) })
+	fmt.Println(iSeeDeadPeople(func()))
+
+}
+
+/*Задание 2. Анонимные функции
+Что нужно сделать
+Напишите функцию, которая на вход принимает функцию вида A func (int, int) int,
+ а внутри оборачивает и вызывает её при выходе (через defer).
+
+Вызовите эту функцию с тремя разными анонимными функциями A.
+Тела функций могут быть любыми, но главное, чтобы все три выполняли разное действие.
+*/
