@@ -16,6 +16,8 @@ func fillMeUp() (a [size]int) {
 	return
 }
 func main() {
+	fmt.Println("Задание 1. Расчёт по формуле")
+	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
 	//var sortedNotUnique=[...]int{1, 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	lookForMe := 2
 	whereToLook := fillMeUp()
