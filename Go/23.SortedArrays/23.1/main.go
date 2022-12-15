@@ -17,7 +17,7 @@ func fillMeUp() (a [size]int) {
 }
 
 func main() {
-	fmt.Println("Задание 1. Расчёт по формуле")
+	fmt.Println("Задание 1. Подсчёт чисел в массиве")
 	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
 	lookForMe := 5
 	checkMe := fillMeUp()
