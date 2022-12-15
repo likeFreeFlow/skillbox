@@ -10,7 +10,7 @@ const size = 10
 
 func fillMeUp() (a [size]int) {
 	rand.Seed(time.Now().UnixNano())
-	for i, _ := range a {
+	for i := 0; i < size; i++ {
 		a[i] = rand.Int()
 	}
 	return
