@@ -18,6 +18,9 @@ func sortIt(a [size]int) (even [size]int, unEven [size]int) {
 	return
 }
 func main() {
+	fmt.Println("Задание 1. Чётные и нечётные")
+	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
+
 	var unsorted = [size]int{5, 4, 9, 2, 4, 6, 7, 9, 0, 3, 2, 3}
 	even, unEven := sortIt(unsorted)
 	fmt.Println("Массив четных чисел", even)

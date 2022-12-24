@@ -32,6 +32,9 @@ func printer(toPrint [4][5]int, toCompare [5]rune, original [4]string) {
 	}
 }
 func main() {
+	fmt.Println("Задание 2. Поиск символов в нескольких строках")
+	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
+
 	whereToLook := [4]string{"Hello world", "Hello Skillbox",
 		"Привет Мир", "Привет Skillbox"}
 
