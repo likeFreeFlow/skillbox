@@ -1,0 +1,13 @@
+func insertionSort (input[size]int)[size]int{
+    for i:=1;i<size;i++{
+        j:=i
+        for j>0{
+            if input[j-1]>input[j] {
+                input[j-1],input[j]=input[j],input[j-1]
+            }
+            j--
+        }
+
+    }
+    return input
+}
