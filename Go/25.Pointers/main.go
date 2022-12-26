@@ -29,6 +29,7 @@ func lookForSubString(str string, sstr string) {
 }
 
 func main() {
+	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
 	var whereToLook string
 	var whatToLook string
 
