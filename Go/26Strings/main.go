@@ -7,14 +7,9 @@ import (
 	"os"
 )
 
-func concat() {
-
-}
-func printer() {
-
-}
-
 func main() {
+	fmt.Println("Цель задания - Написать программу аналог cat. ")
+	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
 	flag.Parse()
 	fileNames := flag.Args()
 	if len(fileNames) == 1 {
@@ -58,8 +53,6 @@ func main() {
 		}
 		defer f3.Close()
 
-		fmt.Println("Done.")
-
 		f1, err := os.Open(fileNames[0])
 		if err != nil {
 			panic(err)
@@ -82,6 +75,7 @@ func main() {
 			f3.WriteString(scanner.Text())
 			f3.WriteString(("\n"))
 		}
+		fmt.Println("Done.")
 	}
 }
 
