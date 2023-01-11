@@ -11,3 +11,14 @@ func insertionSort (input[size]int)[size]int{
     }
     return input
 }
+
+func bubbleSort(input[size]int)input[size]int{
+    for i:=size;i>0;i--{
+        for j:=1;j<i;j++{
+            if input [j-1]>input[j]{
+                input [j-1],input[j]=input [j],input[j-1]
+            }
+        }
+    }
+    return
+}

@@ -10,6 +10,7 @@ func searchForIndex(whereToLook [4]string, whatToLook [5]rune) (index [4][5]int)
 		words := strings.Fields(whereToLook[i])
 		word := words[1]
 		for j := 0; j < len(whatToLook); j++ {
+			//strings.index-узнал после того, как расписал свое решение
 			index[i][j] = -1
 			for k := 0; k < len(word); k++ {
 				if whatToLook[j] == rune(word[k]) {
