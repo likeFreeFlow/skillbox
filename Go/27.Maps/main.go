@@ -22,7 +22,7 @@ func (s StudentType) info() string {
 	return s.name + " " + strconv.Itoa(s.age) + " " + strconv.Itoa(s.grade)
 }
 
-//Переделать на методы
+
 //методы put&get с проверкой на ошибки
 
 func (ivanov *StudentType) put(m map[string]*StudentType) {
@@ -35,7 +35,7 @@ func (ivanov StudentType) get(m map[string]*StudentType) bool {
 }
 
 func main() {
-
+	fmt.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
 	mapStudents := make(map[string]*StudentType, 0)
 
 	// Присваивание значений переменным для посл проверки и занесения в карту
@@ -80,20 +80,6 @@ func main() {
 		fmt.Printf("%v. %s\n", counter, v.info())
 		counter++
 	}
-	//fmt.Println(line /*studentName, studentAge, studentGrade*/)
-	/*for {
-		fmt.Println("Введите имя студента")
-		studentName := bufio.NewReader(os.Stdin)
-		//fmt.Println("Возраст")
-		//studentAge := bufio.NewReader(os.Stdin)
-		//fmt.Println("Курс")
-		//studentGrade := bufio.NewReader(os.Stdin)
-
-		fmt.Println(studentName/*, studentAge, studentGrade)
-		break
-	}*/
-
-	//fmt.Println(Student)
 }
 
 /*Цель задания
