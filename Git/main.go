@@ -12,6 +12,7 @@ func main() {
 	fmt.Println("первый коммит")
 	fmt.Println("2 коммит")
 	fmt.Println("3 коммит")
+	fmt.Println("4 коммит")
 	var content string
 	for {
 		fmt.Scan(&content)
