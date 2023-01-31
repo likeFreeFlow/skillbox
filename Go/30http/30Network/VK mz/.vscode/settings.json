@@ -1,0 +1,4 @@
+{
+    "go.inlayHints.functionTypeParameters": true,
+    "go.useCodeSnippetsOnFunctionSuggest": true
+}

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	user "main/pkg/user"
 	"net/http"
 
@@ -10,7 +9,8 @@ import (
 )
 
 func main() {
-	log.Println("30.5\n------------")
+	fmt.Println("30 блок, работа с http")
+	fmt.Println("ищу практику на го, barakovvm@ya.ru")
 
 	r := chi.NewRouter()
 
@@ -24,11 +24,4 @@ func main() {
 
 	http.ListenAndServe(":8080", r)
 	fmt.Println("Server is listening")
-	/* 	err :=http.ListenAndServe(":8080", r)
-	   	if err != nil {
-	   		log.Printf("Ошибка запуска сервера\n%v", err)
-	   	} else {
-	   		fmt.Println("Server is running")
-	   	}
-	*/
 }
