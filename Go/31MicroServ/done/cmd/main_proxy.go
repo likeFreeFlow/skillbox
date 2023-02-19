@@ -15,6 +15,7 @@ const (
 
 func main() {
 	log.Println("31.5 Proxy\n-----------")
+	log.Println("Ищу практику в интересных проектах на го. barakovvm@ya.ru ")
 
 	mux := http.NewServeMux()
 

@@ -3,7 +3,7 @@ package storage
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/mattn/go-sqlite3"
+
 	"log"
 )
 
@@ -19,9 +19,10 @@ func (u *User) String() string {
 }
 
 func (u *User) Create(db *sql.DB) (int, error) {
-	result, err := db.Exec("insert into users (name, age) values ($1, $2);", u.Name, u.Age)
+	result, err := db.Exec("INSERT INTO users (name, age) VALUES (?, ?);", u.Name, u.Age)
+
 	if err != nil {
-		log.Println(err)
+		log.Println("Storage Users Create Exec", err)
 		return 0, err
 	}
 	id, err := result.LastInsertId()
@@ -29,13 +30,13 @@ func (u *User) Create(db *sql.DB) (int, error) {
 }
 
 func (u *User) Delete(db *sql.DB) error {
-	_, err := db.Exec("delete from users where id = $1", u.ID)
+	_, err := db.Exec("DELETE FROM users WHERE id = ?", u.ID)
 	return err
 }
 
 func (u *User) Get(db *sql.DB) error {
-	row := db.QueryRow("select * from users where id=$1", u.ID)
-	err := row.Scan(u.ID, u.Name, u.Age)
+	row := db.QueryRow("SELECT * FROM users WHERE id=?", u.ID)
+	err := row.Scan(&u.ID, &u.Name, &u.Age)
 	if err != nil {
 		log.Println(err)
 		return err
@@ -54,31 +55,32 @@ func (u *User) AddFriend(newFriend *User, db *sql.DB) error {
 		log.Println(err)
 		return err
 	}
+	_, err = db.Exec("insert into friends (user1id, user2id) values ($1, $2);", newFriend.ID, u.ID)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
 	_ = u.getFriendsID(db)
 	_ = newFriend.getFriendsID(db)
 	return nil
 }
 
 func (u *User) getFriendsID(db *sql.DB) error {
-	rows, err := db.Query("select * from friends where user1id=$1 or user2id=$2", u.ID, u.ID)
+	rows, err := db.Query("select user2id from friends where user1id=$1", u.ID)
 	if err != nil {
 		log.Println(err)
 		return err
 	}
 	defer rows.Close()
-
+	counter := 0
 	for rows.Next() {
-		friendID1, friendID2 := 0, 0
-		err = rows.Scan(&friendID1, friendID2)
+		counter++
+		log.Println(counter)
+		friendID := 0
+		err = rows.Scan(&friendID)
 		if err != nil {
 			log.Println(err)
 			continue
-		}
-		friendID := 0
-		if friendID1 == u.ID {
-			friendID = friendID2
-		} else {
-			friendID = friendID1
 		}
 		u.Friends = append(u.Friends, friendID)
 	}
@@ -86,16 +88,19 @@ func (u *User) getFriendsID(db *sql.DB) error {
 }
 
 func (u *User) GetFriends(db *sql.DB) ([]User, error) {
-	rows, err := db.Query("select * from users join friends on friends.user1id=$1 or friends.user2id=$2", u.ID, u.ID)
+
+	rows, err := db.Query("select users.id, users.name, users.age from users join friends on friends.user2id=? where friends.user1id=users.id  ", u.ID)
+
 	if err != nil {
 		log.Println(err)
 		return []User{}, err
 	}
 	defer rows.Close()
+
 	friends := []User{}
 	for rows.Next() {
 		uu := User{}
-		err = rows.Scan(&uu.ID, uu.Name, uu.Age)
+		err = rows.Scan(&uu.ID, &uu.Name, &uu.Age)
 		if err != nil {
 			log.Println(err)
 			continue

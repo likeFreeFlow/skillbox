@@ -1,17 +1,19 @@
 package User
 
 import (
-	check "../checks"
-	"../storage"
 	"encoding/json"
 	"fmt"
-	"github.com/go-chi/chi"
 	"log"
+	check "main/pkg/checks"
 	"net/http"
 	"strconv"
+
+	"main/pkg/storage"
+
+	"github.com/go-chi/chi/v5"
 )
 
-type User struct {
+type Useru struct {
 	ID      int
 	Name    string `json:"name"`
 	Age     int    `json:"age"`
@@ -20,12 +22,12 @@ type User struct {
 
 var db = storage.ConnectDB()
 
-func (u User) String() string {
+func (u Useru) String() string {
 	return fmt.Sprintf("<User> %v. %v (%v)", u.ID, u.Name, u.Age)
 }
 
-func (u User) Create(w http.ResponseWriter, r *http.Request) {
-	content, ok := check.IsPOSTAndGetContent(&w, r, "Ошбика при создании пользователя")
+func (u Useru) Create(w http.ResponseWriter, r *http.Request) {
+	content, ok := check.IsPOSTAndGetContent(&w, r, "Ошибка при создании пользователя")
 	if !ok {
 		return
 	}
@@ -55,7 +57,7 @@ type newFriends struct {
 	Id2 int `json:"target_id"`
 }
 
-func (u User) AddFriend(w http.ResponseWriter, r *http.Request) {
+func (u Useru) AddFriend(w http.ResponseWriter, r *http.Request) {
 	content, ok := check.IsPOSTAndGetContent(&w, r, "Ошбика при создании пользователя")
 	if !ok {
 		return
@@ -90,23 +92,24 @@ type userDelete struct {
 	Id int `json:"target_id"`
 }
 
-func (u User) Delete(w http.ResponseWriter, r *http.Request) {
+func (u Useru) Delete(w http.ResponseWriter, r *http.Request) {
 	content, ok := check.ReadContent(&w, r.Body)
 	if !ok {
-		check.ReturnIntServErr(&w, check.Err{"Ошибка при удалении пользователя"})
-		log.Println("Ошбика при удалении пользователя")
+		check.ReturnIntServErr(&w, check.Err{MSG: "Ошибка при удалении пользователя"})
 		return
 	}
-	uDelete := userDelete{}
+	var uDelete = userDelete{}
 	if err := json.Unmarshal(content, &uDelete); err != nil {
 		check.ReturnIntServErr(&w, err)
 		return
 	}
+
 	u1 := storage.User{ID: uDelete.Id}
 	if err := u1.Get(db); err != nil {
 		check.ReturnIntServErr(&w, err)
 		return
 	}
+	
 	if err := u1.Delete(db); err != nil {
 		check.ReturnIntServErr(&w, err)
 		return
@@ -117,7 +120,7 @@ func (u User) Delete(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Удален пользователь: %v\n", u1.String())
 }
 
-func (u User) GetFriend(w http.ResponseWriter, r *http.Request) {
+func (u Useru) GetFriend(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		check.ReturnIntServErr(&w, err)
@@ -137,14 +140,14 @@ func (u User) GetFriend(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(b)
-	log.Printf("Запрошен список друзей для %v\n", u)
+	log.Println("Запрошен список друзей для пользователя с id =", id)
 }
 
 type userAge struct {
 	Age int `json:"new_age"`
 }
 
-func (u User) SetAge(w http.ResponseWriter, r *http.Request) {
+func (u Useru) SetAge(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		check.ReturnIntServErr(&w, err)
@@ -152,7 +155,7 @@ func (u User) SetAge(w http.ResponseWriter, r *http.Request) {
 	}
 	content, ok := check.ReadContent(&w, r.Body)
 	if !ok {
-		check.ReturnIntServErr(&w, check.Err{"Ошибка при обновлении возраста пользователя"})
+		check.ReturnIntServErr(&w, check.Err{MSG: "Ошибка при обновлении возраста пользователя"})
 		log.Println("Ошбика при обновлении возраста пользователя")
 		return
 	}

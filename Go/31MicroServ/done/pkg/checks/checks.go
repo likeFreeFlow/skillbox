@@ -26,7 +26,7 @@ func IsPOST(w *http.ResponseWriter, method, msg string) bool {
 func ReturnIntServErr(w *http.ResponseWriter, err error) {
 	(*w).WriteHeader(http.StatusInternalServerError)
 	(*w).Write([]byte(err.Error()))
-	log.Println(err)
+	log.Println("CHecks RISE", err)
 }
 
 func ReadContent(w *http.ResponseWriter, body io.ReadCloser) ([]byte, bool) {

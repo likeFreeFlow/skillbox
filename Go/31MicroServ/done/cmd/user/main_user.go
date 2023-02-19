@@ -1,10 +1,12 @@
 package main
 
 import (
-	user "../../../31.5/pkg/user"
-	"github.com/go-chi/chi"
+	"fmt"
 	"log"
+	user "main/pkg/user"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 func main() {
@@ -12,11 +14,12 @@ func main() {
 
 	r := chi.NewRouter()
 
-	r.Post("/", user.User{}.Create)
-	r.Delete("/", user.User{}.Delete)
-	r.Put("/{id}", user.User{}.SetAge)
+	r.Post("/", user.Useru{}.Create)
+	r.Delete("/", user.Useru{}.Delete)
+	r.Put("/{id}", user.Useru{}.SetAge)
 
 	err := http.ListenAndServe(":8081", r)
+	fmt.Println("Server is lstening")
 	if err != nil {
 		log.Printf("Ошибка запуска сервера\n%v", err)
 	}

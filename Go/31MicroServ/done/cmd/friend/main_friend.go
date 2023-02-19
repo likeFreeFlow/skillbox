@@ -1,10 +1,12 @@
 package main
 
 import (
-	user "../../../31.5/pkg/user"
-	"github.com/go-chi/chi"
 	"log"
 	"net/http"
+
+	user "main/pkg/user"
+
+	"github.com/go-chi/chi/v5"
 )
 
 func main() {
@@ -12,8 +14,8 @@ func main() {
 
 	r := chi.NewRouter()
 
-	r.Post("/", user.User{}.AddFriend)
-	r.Get("/{id}", user.User{}.GetFriend)
+	r.Post("/", user.Useru{}.AddFriend)
+	r.Get("/{id}", user.Useru{}.GetFriend)
 
 	err := http.ListenAndServe(":8082", r)
 	if err != nil {
